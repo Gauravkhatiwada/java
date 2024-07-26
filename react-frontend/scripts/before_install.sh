@@ -1,13 +1,19 @@
 #!/bin/bash
 
-#_Change_Working_Directory
-cd /home/ec2-user/server
+# Enable debug mode for detailed logging
+set -x
 
-#_Update_&_Set_Node_Version
-curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
+# Change Working Directory
+cd /home/ec2-user/server || { echo "Failed to change directory to /home/ec2-user/server"; exit 1; }
 
-#_Download_Node_&NPM
-yum -y install nodejs npm
+# Update & Set Node Version
+curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash - || { echo "Failed to set up NodeSource repository"; exit 1; }
 
-#_Download_PM2
-npm install pm2@latest -g
+# Download Node.js & NPM
+sudo yum -y install nodejs npm || { echo "Failed to install Node.js and NPM"; exit 1; }
+
+# Download PM2
+sudo npm install pm2@latest -g || { echo "Failed to install PM2"; exit 1; }
+
+# Disable debug mode
+set +x
