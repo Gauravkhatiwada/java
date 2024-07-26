@@ -4,23 +4,20 @@ phases:
   install:
     runtime-versions:
       nodejs: 16
-   
     commands:
-        # install npm
-        - npm install
-       
+      - echo "Navigating to react-frontend directory..."
+      - cd react-frontend
+      - echo "Installing dependencies..."
+      - npm install
   build:
     commands:
-        # run build script
-        - npm run-script build
-     
+      - echo "Building the React app..."
+      - npm run build
+  post_build:
+    commands:
+      - echo "Post-build steps..."
+
 artifacts:
-  # include all files required to run application
-  # notably excluded is node_modules, as this will cause overwrite error on deploy
   files:
-    - public/**/*
-    - src/**/*
-    - package.json
-    - server.js
-    - appspec.yml
-    - scripts/**/*
+    - '**/*'
+  base-directory: react-frontend/build
