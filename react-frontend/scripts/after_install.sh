@@ -1,12 +1,10 @@
 #!/bin/bash
 
-#_Change_Working_Directory
-cd /home/ec2-user/server
+# Enable debug mode for detailed logging
+set -x
 
-#_Remove_Unused_Code
-rm -rf node_modules
-rm -rf build
+# Any post-installation steps can be added here
+echo "AfterInstall script executed successfully."
 
-#Install_node_modules_&_Make_React_Build
-npm  install
-npm run build
+# Disable debug mode
+set +x

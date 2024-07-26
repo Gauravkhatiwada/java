@@ -1,10 +1,11 @@
 #!/bin/bash
 
-#_Change_Working_Directory
-cd /home/ec2-user/server
+# Enable debug mode for detailed logging
+set -x
 
-#_Delete_Old_PM2_Service
-#sudo pm2 delete Frontend
-#sudo pm2 start server.js --name Frontend
-pm2 delete Frontend
-pm2 start server.js --name Frontend
+# Start the Node.js application with PM2
+cd /home/ec2-user/server || { echo "Failed to change directory to /home/ec2-user/server"; exit 1; }
+pm2 start server.js || { echo "Failed to start application with PM2"; exit 1; }
+
+# Disable debug mode
+set +x
